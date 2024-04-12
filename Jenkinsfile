@@ -16,6 +16,12 @@ node {
                 sleep(5)
             }
         }
+         stage("Build") {
+                docker.image('maven:3.8.3-jdk-8-slim').inside {
+                    sh 'mvn -B -f ./worker/pom.xml clean compile'
+                    sh 'mvn -B -f ./worker/pom.xml test'
+                }
+            }
     } catch(err){
         // here you can do any error handling
         println("Error: " + err.toString())
