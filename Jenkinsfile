@@ -1,30 +1,25 @@
-pipeline {
-    agent any
+#!groovy
 
-    stages{
-        stage("one"){
-            steps{
-                echo 'step 1'
-                sleep 3
-            }
+node {
+    try {
+        stage('one') {
+            echo 'step 1'
+            sleep(3)
         }
-        stage("two"){
-            steps{
-                echo 'step 2'
-                sleep 9
-            }
+        stage('two') {
+            echo 'step 2'
+            sleep(9)
         }
-        stage("three"){
-            steps{
+        stage('three') {
+            if (env.BRANCH_NAME == 'master') {
                 echo 'step 3'
-                sleep 5
+                sleep(5)
             }
         }
-    }
-
-    post{
-      always{
-          echo 'This pipeline is completed.'
-      }
+    } catch(err){
+        // here you can do any error handling
+        println("Error: " + err.toString())
+    } finally {
+        println('This pipeline is completed.')
     }
 }
