@@ -15,7 +15,7 @@ node {
              stage("Build") {
                  sh 'mvn -B -f ./worker/pom.xml clean compile'
              }
-             stage("Build") {
+             stage("Test") {
                  sh 'mvn -B -f ./worker/pom.xml test'
              }
         }
