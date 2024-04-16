@@ -1,4 +1,4 @@
-FROM maven:3.8.3-jdk-8-slim
+FROM maven:3.8.5-jdk-11-slim
 
 WORKDIR /app
 
