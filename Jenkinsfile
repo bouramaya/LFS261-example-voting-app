@@ -218,7 +218,8 @@ pipeline {
     }
 
     stage('Sonarqube') {
-        agent any
+        agent 'jdk11'
+
         when{
             branch 'master'
         }
