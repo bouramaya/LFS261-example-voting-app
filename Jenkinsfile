@@ -152,9 +152,9 @@ pipeline {
         }
 
       }
-      when {
-        changeset '**/vote/**'
-      }
+//      when {
+//        changeset '**/vote/**'
+//      }
       steps {
         echo 'Compiling vote app.'
         dir(path: 'vote') {
@@ -173,7 +173,8 @@ pipeline {
 
       }
       when {
-        changeset '**/vote/**'
+//        changeset '**/vote/**'
+        branch 'master'
       }
       steps {
         echo 'Running Unit Tests on vote app.'
@@ -186,9 +187,23 @@ pipeline {
     }
 
     stage('vote integration'){
+      agent any
+      when{
+//        changeset "**/vote/**"
+        branch 'master'
+      }
+      steps{
+        echo 'Running Integration Tests on vote app'
+        dir('vote'){
+          sh 'sh integration_test.sh'
+        }
+      }
+    }
+
+    stage('vote integration'){
     agent any
     when{
-      changeset "**/vote/**"
+//      changeset "**/vote/**"
       branch 'master'
     }
     steps{
