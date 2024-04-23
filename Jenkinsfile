@@ -219,7 +219,7 @@ pipeline {
 
     stage('Sonarqube') {
         agent{
-          label 'jdk11'
+          label 'jdk17'
         }
 
         when{
